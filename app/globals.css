@@ -1,0 +1,763 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-base text-ink font-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+  }
+  a {
+    @apply text-ink;
+  }
+  :focus-visible {
+    outline: 2px solid #0284C7;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /*
+    Microinteracciones de los botones CTA, sin JS. Al pasar el cursor
+    (o con foco de teclado) el botón se eleva 2px y crece un 2 %, con
+    una sombra teñida de --btn-glow; al pulsar se hunde (scale .98) con
+    una transición más corta para que la respuesta sea inmediata.
+
+    El hover va dentro de (hover: hover) and (pointer: fine) para que en
+    móvil el botón no se quede "levantado" tras un toque. El movimiento
+    es solo transform, que el navegador anima en el compositor.
+  */
+  .btn-fx {
+    --btn-glow: 2 102 144; /* accent-dark */
+    transition-property: transform, box-shadow, background-color, border-color, color;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1); /* ease-out */
+  }
+  .btn-fx-neutral {
+    --btn-glow: 9 9 11; /* ink */
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-fx:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 12px 24px -12px rgb(var(--btn-glow) / 0.55),
+        0 4px 10px -6px rgb(9 9 11 / 0.15);
+    }
+  }
+  .btn-fx:focus-visible {
+    transform: translateY(-2px) scale(1.02);
+  }
+  .btn-fx:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 4px 10px -8px rgb(var(--btn-glow) / 0.5);
+    transition-duration: 100ms;
+  }
+
+  /*
+    Destello metálico: una banda diagonal de luz (::after, la mitad de
+    ancho que el botón) que cruza de translateX(-100%) a translateX(200%),
+    es decir, de fuera por la izquierda a fuera por la derecha.
+    isolation + z-index:-1 la pintan sobre el fondo del botón pero bajo
+    el texto, que no pierde nitidez. overflow: clip (con hidden como
+    respaldo) la recorta a las esquinas redondeadas sin convertir el
+    botón en contenedor de scroll, así que su línea base no cambia.
+
+    .btn-shimmer      → destello al pasar el cursor o con foco de teclado.
+    .btn-shimmer-loop → además, un destello periódico cada 4,5 s
+                        (botones de compra). Se usa junto a .btn-shimmer.
+  */
+  .btn-shimmer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    overflow: clip;
+  }
+  .btn-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: -1;
+    width: 50%;
+    pointer-events: none;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgb(255 255 255 / 0.22) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+  }
+  .btn-shimmer-loop::after {
+    will-change: transform;
+    animation: btn-shimmer-loop 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  /* Al cambiar de animación esta arranca de cero: un barrido inmediato
+     en hover y, al salir, el bucle vuelve a esperar antes del siguiente. */
+  @media (hover: hover) and (pointer: fine) {
+    .btn-shimmer:hover::after {
+      animation: btn-shimmer-sweep 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+  }
+  .btn-shimmer:focus-visible::after {
+    animation: btn-shimmer-sweep 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  /* Sin elevación, escala ni destello con movimiento reducido; quedan
+     el cambio de color y la sombra, que no implican desplazamiento. */
+  @media (prefers-reduced-motion: reduce) {
+    .btn-fx:hover,
+    .btn-fx:focus-visible,
+    .btn-fx:active {
+      transform: none;
+    }
+    .btn-shimmer::after {
+      content: none;
+    }
+  }
+
+  .btn-primary {
+    @apply btn-fx btn-shimmer inline-flex items-center justify-center gap-2 text-center rounded-card bg-accent px-6 py-3 font-mono text-sm font-medium text-white hover:bg-accent-dark;
+  }
+
+  .btn-secondary {
+    @apply btn-fx btn-fx-neutral inline-flex items-center justify-center gap-2 text-center rounded-card border border-line bg-base px-6 py-3 font-mono text-sm font-medium text-ink hover:border-ink;
+  }
+
+  .btn-dark {
+    @apply btn-fx btn-fx-neutral btn-shimmer inline-flex items-center justify-center gap-2 text-center rounded-card bg-ink px-5 py-2.5 font-mono text-xs font-medium text-white hover:bg-ink-700;
+  }
+
+  /*
+    Superficie de cristal: borde de definición ultrafino (zinc-200/80),
+    blanco translúcido con desenfoque de fondo, un filo de luz interior
+    arriba y una sombra ambiental muy difusa. Es la base de .card y de
+    los contenedores de tablas, veredictos y el selector de duelos.
+  */
+  .glass-panel {
+    border-radius: theme(borderRadius.card);
+    border: 1px solid rgb(228 228 231 / 0.8);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.88), rgb(255 255 255 / 0.72));
+    -webkit-backdrop-filter: blur(12px) saturate(1.3);
+    backdrop-filter: blur(12px) saturate(1.3);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.75),
+      0 1px 2px rgb(9 9 11 / 0.04),
+      0 12px 32px -20px rgb(11 18 32 / 0.28);
+  }
+
+  .card {
+    @apply glass-panel transition-shadow hover:shadow-[0_6px_24px_-8px_rgba(11,18,32,0.16)];
+  }
+
+  /*
+    Respuesta táctil de elementos clicables que no son botones CTA
+    (pastillas, segmentos, desplegables): se hunden al pulsar. .lift
+    añade la elevación de 2px con un resplandor atenuado al pasar el
+    ratón. Sin desplazamiento con movimiento reducido.
+  */
+  .press {
+    transition-property: transform, box-shadow, background-color, border-color, color, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+  .press:active {
+    transform: scale(0.97);
+    transition-duration: 100ms;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .lift:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 10px 22px -14px rgb(2 102 144 / 0.45),
+        0 2px 6px -3px rgb(9 9 11 / 0.12);
+    }
+    .lift:active {
+      transform: translateY(0) scale(0.97);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .press:active,
+    .lift:hover,
+    .lift:active {
+      transform: none;
+    }
+  }
+
+  /*
+    Tipografía de precisión para cifras técnicas (components/ui/NumText):
+    mono, cifras tabulares y tracking ajustado; la cifra y su unidad no
+    se separan en dos líneas.
+  */
+  .num {
+    font-family: var(--font-mono), monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.94em;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  /*
+    Insignia de victoria (components/ui/WinBadge): grafito titanio con un
+    filo de luz, punto de acento neón y un micro-destello que la cruza
+    una vez al aparecer y otra al pasar el ratón.
+  */
+  .badge-win {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    overflow: clip;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    max-width: 100%;
+    border-radius: 9999px;
+    padding: 0.25rem 0.625rem 0.25rem 0.5rem;
+    background: linear-gradient(135deg, #3f3f46 0%, #18181b 55%, #27272a 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.16),
+      inset 0 0 0 1px rgb(255 255 255 / 0.06),
+      0 4px 12px -6px rgb(9 9 11 / 0.45);
+    color: #fafafa;
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .badge-win-sm {
+    gap: 0.3rem;
+    padding: 0.125rem 0.5rem 0.125rem 0.375rem;
+    font-size: 0.625rem;
+  }
+  .badge-win-dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: #bef264; /* lime-300 */
+    box-shadow:
+      0 0 0 2px rgb(190 242 100 / 0.18),
+      0 0 8px rgb(190 242 100 / 0.8);
+  }
+  .badge-win::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: -1;
+    width: 45%;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgb(255 255 255 / 0.28) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    pointer-events: none;
+    animation: btn-shimmer-sweep 1.1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .badge-win:hover::after {
+      animation: badge-win-glint 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .badge-win::after {
+      content: none;
+    }
+  }
+
+  /*
+    Tarjetas clicables del catálogo ("spotlight"): al pasar el ratón la
+    tarjeta se eleva 2px con una sombra más profunda, el borde toma el
+    tono de acento y la imagen (.card-spotlight-media, dentro de un
+    contenedor overflow-hidden) crece un 5 %. El hover solo existe con
+    puntero fino, así que en táctil no queda pegado tras el toque; con
+    teclado, el foco marca el borde.
+  */
+  .card-spotlight {
+    transition-property: transform, box-shadow, border-color;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+  .card-spotlight-media {
+    transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .card-spotlight:hover {
+      transform: translateY(-2px);
+      border-color: rgb(2 132 199 / 0.45);
+      box-shadow:
+        0 16px 32px -14px rgb(11 18 32 / 0.22),
+        0 4px 12px -6px rgb(2 102 144 / 0.16);
+    }
+    .card-spotlight:hover .card-spotlight-media {
+      transform: scale(1.05);
+    }
+  }
+  /* Pulsación: la tarjeta se hunde al instante (también en táctil). */
+  .card-spotlight:active {
+    transform: translateY(0) scale(0.98);
+    transition-duration: 100ms;
+  }
+  .card-spotlight:focus-visible {
+    border-color: theme(colors.accent.DEFAULT);
+  }
+  /* Regla aparte: un navegador sin :has() descartaría la lista entera. */
+  .card-spotlight:has(:focus-visible) {
+    border-color: rgb(2 132 199 / 0.45);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-spotlight:hover,
+    .card-spotlight:active,
+    .card-spotlight:hover .card-spotlight-media {
+      transform: none;
+    }
+  }
+
+  /*
+    Filas de las tablas comparativas (.spec-table en el <table>): al
+    pasar el ratón la fila pasa a fondo blanco, los valores se oscurecen
+    a ink, la etiqueta toma el acento y aparece un indicador de 2px a la
+    izquierda (::before de la primera celda, solo transform y opacity,
+    sin mover la maquetación). Igual que en las tarjetas, solo con ratón.
+  */
+  .spec-table tbody tr {
+    transition:
+      background-color 180ms ease-out,
+      visibility 0s linear 0s;
+  }
+  .spec-table tbody tr > * {
+    transition:
+      color 180ms ease-out,
+      padding 300ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  /*
+    Modo "Solo diferencias" (components/comparisons/SpecDiffToggle): las
+    filas con data-same se pliegan. Cada celda envuelve su contenido en
+    .spec-cell, una rejilla que pasa de 1fr a 0fr (transición de altura
+    real, sin medir con JS) mientras se funden y el padding vertical va
+    a 0. Al terminar, visibility: hidden las saca también del árbol de
+    accesibilidad; al volver se muestran al instante y se despliegan.
+  */
+  .spec-cell {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition:
+      grid-template-rows 300ms cubic-bezier(0.33, 1, 0.68, 1),
+      opacity 220ms ease-out;
+  }
+  .spec-cell > div {
+    min-height: 0;
+  }
+  [data-diff-only] .spec-table tbody tr[data-same] {
+    border-top-width: 0;
+    visibility: hidden;
+    transition:
+      background-color 180ms ease-out,
+      visibility 0s linear 300ms;
+  }
+  [data-diff-only] .spec-table tbody tr[data-same] > * {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  [data-diff-only] .spec-table tbody tr[data-same] .spec-cell {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+  [data-diff-only] .spec-table tbody tr[data-same] .spec-cell > div {
+    overflow: hidden;
+  }
+  .spec-table tbody tr > :first-child {
+    position: relative;
+  }
+  .spec-table tbody tr > :first-child::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background-color: theme(colors.accent.DEFAULT);
+    opacity: 0;
+    transform: scaleY(0.4);
+    transition-property: transform, opacity;
+    transition-duration: 180ms;
+    transition-timing-function: ease-out;
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .spec-table tbody tr:hover {
+      background-color: theme(colors.surface);
+    }
+    .spec-table tbody tr:hover > td {
+      color: theme(colors.ink.DEFAULT);
+    }
+    .spec-table tbody tr:hover > th {
+      color: theme(colors.accent.dark);
+    }
+    .spec-table tbody tr:hover > :first-child::before {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  /*
+    Resplandor ambiental detrás de la imagen principal (Hero y ficha):
+    dos degradados radiales de azul acento/cielo con opacidad .22. La
+    posición (inset) y el desenfoque (blur-2xl / blur-3xl) se ponen en el
+    marcado; la imagen va encima con z-10. Es estático: no anima nada.
+  */
+  .ambient-glow {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 9999px;
+    background:
+      radial-gradient(closest-side at 42% 42%, rgb(56 189 248), transparent),
+      radial-gradient(closest-side at 60% 60%, theme(colors.accent.DEFAULT), transparent);
+    opacity: 0.22;
+  }
+
+  /*
+    Insignia de cristal (components/ui/Badge.tsx, tone="glass"): fondo
+    blanco translúcido con backdrop-blur y un borde degradado de 1px.
+    El borde es un ::before recortado con máscara (content-box excluido)
+    en vez del truco padding-box/border-box, que necesita un fondo opaco
+    y aquí teñiría el cristal. Al pasar el ratón, un micro-brillo cruza
+    la insignia (mismo barrido que los botones).
+  */
+  .badge-glass {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    overflow: clip;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 100%;
+    border-radius: 8px;
+    padding: 0.3125rem 0.75rem;
+    background: linear-gradient(135deg, rgb(255 255 255 / 0.78), rgb(240 249 255 / 0.55));
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    box-shadow:
+      0 1px 2px rgb(9 9 11 / 0.06),
+      0 6px 16px -8px rgb(2 102 144 / 0.3),
+      inset 0 1px 0 rgb(255 255 255 / 0.8);
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: theme(colors.ink.700);
+  }
+  .badge-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      120deg,
+      rgb(2 132 199 / 0.75),
+      rgb(255 255 255 / 0.95) 35%,
+      rgb(161 161 170 / 0.6) 65%,
+      rgb(2 132 199 / 0.55)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .badge-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: -1;
+    width: 50%;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgb(255 255 255 / 0.9) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .badge-glass:hover::after {
+      animation: btn-shimmer-sweep 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .badge-glass::after {
+      content: none;
+    }
+  }
+
+  /*
+    Tooltip de cristal sin JS (components/ui/Tooltip.tsx). El término
+    lleva subrayado punteado y es enfocable (tabindex=0): el globo se
+    muestra con hover (solo ratón) o con foco (teclado, y toque en
+    móvil), y se oculta con opacity + visibility (con retardo al ocultar
+    para que se vea el fundido).
+
+    Posiciones, elegidas para que el globo nunca salga de su contenedor
+    (un globo oculto también cuenta para el scroll):
+    .tip-top-end → encima, alineado a la derecha del término (valores
+                   alineados a la derecha, p. ej. la ficha técnica).
+    .tip-right   → a la derecha de la etiqueta de fila, sobre las celdas
+                   de valores; así queda dentro de las tablas con scroll
+                   horizontal en lugar de recortarse o ensancharlas.
+  */
+  .tip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+    border-radius: 2px;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: rgb(2 132 199 / 0.65);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .tip-bubble {
+    position: absolute;
+    z-index: 20;
+    width: max-content;
+    max-width: 15rem;
+    padding: 0.5rem 0.625rem;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: 8px;
+    background: rgb(15 23 42 / 0.9);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 32px -12px rgb(2 6 23 / 0.55);
+    color: #fff;
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0.005em;
+    text-align: left;
+    text-transform: none;
+    white-space: normal;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 200ms ease-out,
+      transform 200ms ease-out,
+      visibility 0s linear 200ms;
+  }
+  .tip-title {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #7dd3fc; /* sky-300 */
+  }
+  .tip-top-end .tip-bubble {
+    right: 0;
+    bottom: calc(100% + 8px);
+    transform: translateY(4px);
+  }
+  .tip-right .tip-bubble {
+    left: calc(100% + 10px);
+    top: -0.5rem;
+    transform: translateX(-4px);
+  }
+  /* Por debajo de md las tablas tienen scroll horizontal y a la derecha
+     de la etiqueta no cabe el globo en la parte visible: se abre debajo,
+     desde el inicio de la etiqueta y con el ancho de la pantalla menos
+     márgenes. */
+  @media (max-width: 767px) {
+    .tip-right .tip-bubble {
+      left: 0;
+      top: calc(100% + 6px);
+      max-width: min(15rem, calc(100vw - 4.5rem));
+      transform: translateY(-4px);
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .tip:hover .tip-bubble {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
+    }
+  }
+  .tip:focus-within .tip-bubble {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tip-bubble {
+      transform: none !important;
+    }
+  }
+
+  /*
+    Barra de progreso de lectura (components/layout/ReadingProgress.tsx):
+    2px fijos arriba del todo, enlazados al scroll de la página con
+    animation-timeline: scroll(root), sin JS. Crece con scaleX desde la
+    izquierda (mismo efecto que width 0 → 100 %, pero sin recalcular la
+    maquetación en cada frame). Sin soporte de animation-timeline no se
+    muestra. Con movimiento reducido se mantiene: no anima por su cuenta,
+    solo refleja la posición de scroll, como la barra de desplazamiento.
+  */
+  .reading-progress {
+    display: none;
+  }
+  @supports (animation-timeline: scroll()) {
+    .reading-progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 60;
+      height: 2px;
+      background-color: theme(colors.accent.DEFAULT);
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      pointer-events: none;
+      animation: reading-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-full border border-line px-3 py-1 text-xs font-medium text-ink-500;
+  }
+
+  .section-label {
+    @apply text-sm font-semibold text-accent;
+  }
+
+  /*
+    Animación de entrada de Reveal / ImageReveal (ver
+    components/motion/useReveal.ts). Solo transform y opacity, que el
+    navegador anima en el compositor sin tocar el hilo principal.
+  */
+  .reveal {
+    transition-property: opacity, transform;
+    transition-duration: var(--reveal-duration, 0.65s);
+    transition-delay: var(--reveal-delay, 0s);
+    transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  .reveal-hidden {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 22px)) scale(var(--reveal-scale, 1));
+  }
+
+  /*
+    Estilos para el contenido HTML de las guías (guide.content), escritos
+    a mano en vez de depender de @tailwindcss/typography — así el
+    maquetado (H2/H3/párrafos/listas) se ve bien aunque ese plugin no
+    esté instalado.
+  */
+  .article-content {
+    @apply text-base leading-relaxed text-ink-700;
+  }
+  .article-content h2 {
+    @apply mt-10 font-display text-2xl font-bold text-ink first:mt-0;
+  }
+  .article-content h3 {
+    @apply mt-7 font-display text-lg font-bold text-ink;
+  }
+  .article-content p {
+    @apply mt-4;
+  }
+  .article-content ul,
+  .article-content ol {
+    @apply mt-4 space-y-2 pl-5;
+  }
+  .article-content ul {
+    @apply list-disc marker:text-accent;
+  }
+  .article-content ol {
+    @apply list-decimal marker:text-accent marker:font-semibold;
+  }
+  .article-content li {
+    @apply pl-1;
+  }
+  .article-content strong {
+    @apply font-semibold text-ink;
+  }
+  .article-content a {
+    @apply font-semibold text-accent hover:underline;
+  }
+
+  /*
+    Selector de duelos (components/comparisons/VersusMatcher.tsx). El aro
+    de flechas del botón VS gira media vuelta por intercambio
+    (--matcher-turns) y cada hueco reaparece con un pequeño "pop" al
+    cambiar de lado.
+  */
+  .matcher-ring {
+    transform: rotate(calc(var(--matcher-turns, 0) * 180deg));
+    transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  .matcher-swap-in {
+    animation: matcher-swap-in 0.4s cubic-bezier(0.33, 1, 0.68, 1) both;
+  }
+}
+
+/* Reaparición de un hueco del selector de duelos tras el intercambio. */
+@keyframes matcher-swap-in {
+  from { opacity: 0.25; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Barra de progreso de lectura: 0 → 100 % del scroll de la página. */
+@keyframes reading-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Barrido único del destello (hover / foco). */
+@keyframes btn-shimmer-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(200%); }
+}
+
+/* Mismo barrido con otro nombre: así el hover reinicia el destello de
+   .badge-win aunque ya se haya visto el de entrada. */
+@keyframes badge-win-glint {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(260%); }
+}
+
+/* Bucle de 4,5 s: espera fuera del botón el 75 % del ciclo y cruza en
+   el último ~1,1 s. */
+@keyframes btn-shimmer-loop {
+  0%, 75% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
