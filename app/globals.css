@@ -805,6 +805,18 @@
   }
 }
 
+@layer utilities {
+  /*
+    Malla técnica de puntos esmeralda (Hero de la portada). Solo fija
+    background-image y background-size, así que se combina con un color
+    de fondo de Tailwind (bg-zinc-50/90) sin pisarlo.
+  */
+  .bg-tech-dots {
+    background-image: radial-gradient(rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
 /* Reaparición de un hueco del selector de duelos tras el intercambio. */
 @keyframes matcher-swap-in {
   from { opacity: 0.25; transform: scale(0.96); }
