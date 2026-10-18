@@ -807,12 +807,12 @@
 
 @layer utilities {
   /*
-    Malla técnica de puntos esmeralda (Hero de la portada). Solo fija
+    Malla técnica de puntos azul de marca (Hero de la portada). Solo fija
     background-image y background-size, así que se combina con un color
     de fondo de Tailwind (bg-zinc-50/90) sin pisarlo.
   */
   .bg-tech-dots {
-    background-image: radial-gradient(rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(2, 132, 199, 0.12) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 }

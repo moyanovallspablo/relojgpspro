@@ -81,7 +81,7 @@ export default function HomeBento() {
     <section className="py-16 sm:py-20">
       <div className="container-page">
         <Reveal className="max-w-2xl">
-          <p className={`${EYEBROW} text-emerald-800`}>Panel de decisión</p>
+          <p className={`${EYEBROW} text-sky-800`}>Panel de decisión</p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
             Lo esencial del catálogo, de un vistazo
           </h2>
@@ -96,8 +96,8 @@ export default function HomeBento() {
           className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4"
         >
           {/* Recomendación top: guía pilar calidad-precio (2x2). */}
-          <article className={`${TILE} border-emerald-200/70 bg-emerald-50/60 md:col-span-2 md:row-span-2`}>
-            <p className={`${EYEBROW} text-emerald-800`}>Recomendación top · Guía 2026</p>
+          <article className={`${TILE} border-sky-200/70 bg-sky-50/60 transition-colors hover:border-sky-300 md:col-span-2 md:row-span-2`}>
+            <p className={`${EYEBROW} text-sky-800`}>Recomendación top · Guía 2026</p>
             <h3 className="mt-3 text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
               Los mejores relojes GPS calidad-precio
             </h3>
@@ -105,13 +105,13 @@ export default function HomeBento() {
               Un ganador por categoría para que pagues por lo que vas a usar:
               de la gama de entrada a los mapas y el outdoor.
             </p>
-            <ul className="mt-6 divide-y divide-emerald-200/70 border-y border-emerald-200/70">
+            <ul className="mt-6 divide-y divide-sky-200/70 border-y border-sky-200/70">
               {valueAwards.map(({ award, names }) => (
                 <li
                   key={award}
                   className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1.5 py-3"
                 >
-                  <span className="rounded-md border border-emerald-200/80 bg-white/70 px-2 py-0.5 font-mono text-[11px] font-medium uppercase tracking-wide text-emerald-900">
+                  <span className="rounded-md bg-sky-100 px-2 py-0.5 font-mono text-[11px] font-medium uppercase tracking-wide text-sky-900">
                     {award}
                   </span>
                   <span className="text-sm font-semibold text-zinc-900">{names.join(" / ")}</span>
@@ -121,7 +121,7 @@ export default function HomeBento() {
             <div className="mt-auto pt-6">
               <Link
                 href={VALUE_GUIDE_PATH}
-                className="btn-fx btn-shimmer inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 px-6 py-3 text-center font-mono text-sm font-medium text-white shadow-sm [--btn-glow:4_120_87] hover:bg-emerald-800 sm:w-auto"
+                className="btn-fx btn-shimmer inline-flex w-full items-center justify-center gap-2 rounded-xl bg-sky-700 px-6 py-3 text-center font-mono text-sm font-medium text-white shadow-sm shadow-sky-600/20 hover:bg-sky-800 sm:w-auto"
               >
                 [ Ver los ganadores ]
               </Link>
@@ -139,7 +139,7 @@ export default function HomeBento() {
                 <li key={slug}>
                   <Link
                     href={`/comparativas/${slug}`}
-                    className="press group block rounded-xl border border-zinc-200/80 bg-white/80 p-4 hover:border-emerald-300 hover:bg-white"
+                    className="press group block rounded-xl border border-zinc-200/80 bg-white/80 p-4 hover:border-sky-300 hover:bg-white"
                   >
                     {[a, b].map((w, i) => (
                       <div key={w.slug}>
@@ -163,7 +163,7 @@ export default function HomeBento() {
             </ul>
             <Link
               href="/comparativas"
-              className="mt-5 text-sm font-semibold text-emerald-800 hover:underline"
+              className="mt-5 text-sm font-semibold text-sky-800 hover:underline"
             >
               Ver todas las comparativas →
             </Link>
@@ -211,7 +211,7 @@ export default function HomeBento() {
 
           {/* Guía pilar de trail y montaña (1x1; 2x1 en md). */}
           <article className={`${TILE} border-zinc-200/80 bg-white/80 md:col-span-2 lg:col-span-1`}>
-            <p className={`${EYEBROW} text-emerald-800`}>Guía outdoor 2026</p>
+            <p className={`${EYEBROW} text-sky-800`}>Guía outdoor 2026</p>
             <h3 className="mt-3 text-lg font-bold tracking-tight text-zinc-900">
               Trail y montaña
             </h3>
@@ -225,7 +225,7 @@ export default function HomeBento() {
             </ul>
             <Link
               href={TRAIL_GUIDE_PATH}
-              className="mt-auto pt-5 text-sm font-semibold text-emerald-800 hover:underline"
+              className="mt-auto pt-5 text-sm font-semibold text-sky-800 hover:underline"
             >
               Ver la guía de montaña →
             </Link>
