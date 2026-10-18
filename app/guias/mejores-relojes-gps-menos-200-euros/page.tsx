@@ -355,17 +355,18 @@ export default function MenosDe200GuidePage() {
               key={p.slug}
               className="grid gap-6 glass-panel p-6 md:grid-cols-[180px_1fr]"
             >
-              <div className="relative mx-auto aspect-square w-40 md:w-full">
+              <div className="relative isolate mx-auto aspect-square w-40 md:w-full">
+                <div aria-hidden="true" className="product-halo" />
                 {p.watch.coverImage ? (
                   <Image
                     src={p.watch.coverImage.src}
                     alt={p.watch.coverImage.alt}
                     fill
                     sizes="180px"
-                    className="object-contain"
+                    className="z-10 object-contain mix-blend-multiply"
                   />
                 ) : (
-                  <span className="flex h-full items-center justify-center font-display text-sm font-semibold text-ink-500">
+                  <span className="relative z-10 flex h-full items-center justify-center font-display text-sm font-semibold text-ink-500">
                     {p.watch.brand}
                   </span>
                 )}

@@ -33,21 +33,22 @@ export default function WatchRowCard({ watch }: { watch: Watch }) {
   const specs = keySpecs(watch);
 
   return (
-    <div className="card-spotlight flex flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm sm:flex-col md:flex-row">
+    <div className="glass-panel card-spotlight flex flex-col overflow-hidden rounded-2xl sm:flex-col md:flex-row">
       {/* Imagen — arriba en móvil, columna derecha (35%) en desktop */}
-      <div className="order-1 flex items-center justify-center overflow-hidden bg-ink-700/[0.03] p-8 sm:aspect-[4/3] md:order-2 md:aspect-auto md:w-[35%]">
+      <div className="relative isolate order-1 flex items-center justify-center overflow-hidden bg-ink-700/[0.03] p-8 sm:aspect-[4/3] md:order-2 md:aspect-auto md:w-[35%]">
+        <div aria-hidden="true" className="product-halo" />
         {watch.coverImage ? (
-          <div className="card-spotlight-media relative h-56 w-full">
+          <div className="card-spotlight-media relative z-10 h-56 w-full">
             <Image
               src={watch.coverImage.src}
               alt={watch.coverImage.alt}
               fill
               sizes="(min-width: 768px) 35vw, 100vw"
-              className="object-contain"
+              className="object-contain mix-blend-multiply"
             />
           </div>
         ) : (
-          <div className="card-spotlight-media flex h-28 w-28 items-center justify-center rounded-full border border-line bg-surface">
+          <div className="card-spotlight-media relative z-10 flex h-28 w-28 items-center justify-center rounded-full border border-line bg-surface">
             <span className="font-display text-sm font-semibold text-ink-500">
               {watch.brand}
             </span>

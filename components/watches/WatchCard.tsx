@@ -15,17 +15,18 @@ export default function WatchCard({ watch }: { watch: Watch }) {
   return (
     <div className="card card-spotlight group flex flex-col overflow-hidden">
       <Link href={`/relojes/${watch.slug}`} className="flex flex-1 flex-col">
-        <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-ink-700/[0.03]">
+        <div className="relative isolate flex aspect-[4/3] items-center justify-center overflow-hidden bg-ink-700/[0.03]">
+          <div aria-hidden="true" className="product-halo" />
           {watch.coverImage ? (
             <Image
               src={watch.coverImage.src}
               alt={watch.coverImage.alt}
               fill
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-              className="card-spotlight-media object-contain p-6"
+              className="card-spotlight-media z-10 object-contain p-6 mix-blend-multiply"
             />
           ) : (
-            <div className="card-spotlight-media flex h-24 w-24 items-center justify-center rounded-full border border-line bg-surface">
+            <div className="card-spotlight-media relative z-10 flex h-24 w-24 items-center justify-center rounded-full border border-line bg-surface">
               <span className="font-display text-xs font-semibold text-ink-500">
                 {watch.brand}
               </span>

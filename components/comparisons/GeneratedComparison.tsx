@@ -128,7 +128,8 @@ function buildSpecRows(pair: [Watch, Watch], stats: DuelStats[]): SpecTableRow[]
 function WatchFace({ watch, stats, other }: { watch: Watch; stats: DuelStats; other: DuelStats }) {
   return (
     <div className="glass-panel flex min-w-0 flex-col items-center gap-3 p-4 text-center sm:p-6">
-      <div className="relative aspect-square w-24 sm:w-40">
+      <div className="relative isolate aspect-square w-24 sm:w-40">
+        <div aria-hidden="true" className="product-halo" />
         {watch.coverImage ? (
           <Image
             src={watch.coverImage.src}
@@ -136,10 +137,10 @@ function WatchFace({ watch, stats, other }: { watch: Watch; stats: DuelStats; ot
             fill
             priority
             sizes="(min-width: 640px) 160px, 96px"
-            className="object-contain"
+            className="z-10 object-contain mix-blend-multiply"
           />
         ) : (
-          <span className="flex h-full items-center justify-center font-display text-sm font-semibold text-ink-500">
+          <span className="relative z-10 flex h-full items-center justify-center font-display text-sm font-semibold text-ink-500">
             {watch.brand}
           </span>
         )}

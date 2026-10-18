@@ -368,7 +368,7 @@ export default function TrailMontanaGuidePage() {
                   reloj y recortado al círculo, sin ensanchar la tarjeta;
                   mix-blend-multiply funde el fondo blanco de la foto. */}
               <div className="relative isolate mx-auto mt-4 aspect-square w-36 overflow-hidden rounded-full">
-                <div aria-hidden="true" className="ambient-glow inset-[10%] blur-2xl" />
+                <div aria-hidden="true" className="product-halo" />
                 {p.watch.coverImage ? (
                   <Image
                     src={p.watch.coverImage.src}
@@ -507,17 +507,18 @@ export default function TrailMontanaGuidePage() {
               id={p.slug}
               className="grid scroll-mt-20 gap-6 glass-panel p-5 sm:p-6 md:grid-cols-[180px_1fr]"
             >
-              <div className="relative mx-auto aspect-square w-40 md:w-full">
+              <div className="relative isolate mx-auto aspect-square w-40 md:w-full">
+                <div aria-hidden="true" className="product-halo" />
                 {p.watch.coverImage ? (
                   <Image
                     src={p.watch.coverImage.src}
                     alt={p.watch.coverImage.alt}
                     fill
                     sizes="180px"
-                    className="object-contain"
+                    className="z-10 object-contain mix-blend-multiply"
                   />
                 ) : (
-                  <span className="flex h-full items-center justify-center font-display text-sm font-semibold text-ink-500">
+                  <span className="relative z-10 flex h-full items-center justify-center font-display text-sm font-semibold text-ink-500">
                     {p.watch.brand}
                   </span>
                 )}

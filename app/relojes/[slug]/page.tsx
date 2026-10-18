@@ -128,7 +128,7 @@ export default function WatchDetailPage({
         {/* isolate + overflow-hidden: el resplandor queda detrás del
             reloj (z-10) y recortado al marco, sin ensanchar la página. */}
         <div className="relative isolate flex aspect-[4/3] items-center justify-center overflow-hidden rounded-card border border-line bg-ink-700/[0.03]">
-          <div aria-hidden="true" className="ambient-glow inset-[12%] blur-2xl" />
+          <div aria-hidden="true" className="product-halo" />
           {watch.coverImage ? (
             <Image
               src={watch.coverImage.src}
@@ -136,7 +136,7 @@ export default function WatchDetailPage({
               fill
               priority
               sizes="(min-width: 768px) 45vw, 100vw"
-              className="z-10 object-contain p-8"
+              className="z-10 object-contain p-8 mix-blend-multiply"
             />
           ) : (
             <div className="relative z-10 flex h-28 w-28 items-center justify-center rounded-full border border-line bg-surface">
