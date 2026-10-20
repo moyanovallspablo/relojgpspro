@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -68,6 +69,7 @@ export default function RootLayout({
             (Lighthouse lo marca como preconexión no utilizada). */}
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
       </head>
+      <GoogleTagManager gtmId="GTM-T9KP6NVH" />
       <body>
         <Header />
         <main>{children}</main>
