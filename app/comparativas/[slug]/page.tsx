@@ -309,7 +309,7 @@ export default function ComparisonDetailPage({
         {comparison.verdict && comparison.verdict.length > 0 && (
           <Reveal className="mt-14">
             <h2 id="veredicto" className="scroll-mt-20 font-display text-2xl font-bold">
-              Veredicto final
+              {comparison.verdictTitle ?? "Veredicto final"}
             </h2>
             <div className="mt-5 grid gap-5 md:grid-cols-2">
               {comparison.verdict.map((v) => {

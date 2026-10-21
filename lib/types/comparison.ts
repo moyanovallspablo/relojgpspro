@@ -23,4 +23,6 @@ export interface Comparison {
   content?: string;
   // Veredicto: cuándo elegir cada reloj, en el orden de watchSlugs.
   verdict?: { watchSlug: string; heading: string; points: string[] }[];
+  // Título del bloque de veredicto (por defecto, "Veredicto final").
+  verdictTitle?: string;
 }

@@ -245,13 +245,13 @@ export const comparisons: Comparison[] = [
     slug: "garmin-forerunner-165-vs-coros-pace-3",
     title: "Garmin Forerunner 165 vs COROS PACE 3",
     watchSlugs: ["garmin-forerunner-165", "coros-pace-3"],
-    seoTitle: "Garmin Forerunner 165 vs COROS Pace 3: ¿Cuál Comprar en 2026?",
+    seoTitle: "Garmin Forerunner 165 vs Coros Pace 3: ¿Cuál comprar en 2026?",
     metaDescription:
-      "Forerunner 165 o COROS PACE 3: AMOLED táctil frente a MIP de 30 g, GPS monobanda frente a multibanda, 19 h frente a 38 h de GPS y Garmin Connect frente a COROS.",
+      "Comparativa a fondo entre el Garmin Forerunner 165 y el Coros Pace 3. Analizamos pantalla AMOLED, precisión GPS multibanda, batería y cuál conviene elegir según tu perfil.",
     summary:
-      "El Forerunner 165 apuesta por una pantalla AMOLED táctil y a color, Garmin Pay y las métricas de salud diaria de Garmin Connect. El PACE 3 responde con GPS multibanda de doble frecuencia, solo 30 g con correa de nylon y el doble de batería con GPS: hasta 38 h frente a las 19 h del 165.",
+      "Si tienes entre 250 y 280 € para un reloj de running, lo más probable es que acabes dudando entre estos dos. Los dos pesan 39 g, tienen altímetro barométrico y navegan por migas de pan, pero resuelven el mismo presupuesto de forma opuesta: el Forerunner 165 pone una pantalla AMOLED táctil, Garmin Pay y la salud diaria de Garmin Connect; el PACE 3, GPS multibanda de doble frecuencia, 30 g con correa de nylon, perfil de triatlón y el doble de batería con GPS (38 h frente a 19 h).",
     winnerNotes:
-      "Para rendimiento puro por menos de 250 € —precisión GPS, ligereza y autonomía— el PACE 3 tiene ventaja objetiva. Para quien quiere un reloj moderno para todo el día, con pantalla táctil AMOLED, pagos y seguimiento de salud, el Forerunner 165 encaja mejor. Ninguno tiene mapas completos.",
+      "La pregunta no es cuál es mejor, sino para qué lo quieres. Para rendimiento puro —precisión GPS, ligereza y autonomía— el PACE 3 tiene ventaja objetiva. Para un reloj moderno que llevar todo el día, con pantalla a color, pagos y seguimiento de salud, el Forerunner 165 encaja mejor. Ninguno tiene mapas completos.",
     specs: [
       {
         label: "Pantalla",
@@ -261,27 +261,35 @@ export const comparisons: Comparison[] = [
         ],
       },
       {
-        label: "Batería (modo reloj)",
-        values: ["Hasta 11 días", "Hasta 15 días"],
+        label: "Peso",
+        values: ["39 g", "39 g (silicona) / 30 g (nylon)"],
       },
       {
-        label: "Batería (GPS continuo)",
+        label: "GPS",
+        values: [
+          "Monobanda: GPS, GLONASS y Galileo",
+          "Multibanda de doble frecuencia: GPS, GLONASS, Galileo, Beidou y QZSS",
+        ],
+      },
+      {
+        label: "Autonomía con GPS",
         values: ["Hasta 19 h (17 h con todos los GNSS)", "Hasta 38 h (15 h en doble frecuencia)"],
       },
       {
-        label: "Sensores GPS",
-        values: [
-          "GPS, GLONASS y Galileo — una frecuencia",
-          "GPS, GLONASS, Galileo, Beidou y QZSS — doble frecuencia",
-        ],
+        label: "Navegación",
+        values: ["Migas de pan (sin mapas)", "Migas de pan (sin mapas)"],
+      },
+      {
+        label: "Perfil de triatlón",
+        values: ["No", "Sí"],
       },
       {
         label: "Altímetro",
         values: ["Barométrico", "Barométrico"],
       },
       {
-        label: "Peso",
-        values: ["39 g", "39 g (silicona) / 30 g (nylon)"],
+        label: "Batería (modo reloj)",
+        values: ["Hasta 11 días", "Hasta 15 días"],
       },
       {
         label: "Pagos sin contacto",
@@ -291,76 +299,71 @@ export const comparisons: Comparison[] = [
         label: "Música offline",
         values: ["Solo en la versión Music", "Sí, de serie"],
       },
-      {
-        label: "Mapas",
-        values: ["No (ruta de migas de pan)", "No (ruta de migas de pan)"],
-      },
     ],
     content: `
-      <h2>Pantalla, visibilidad y peso: AMOLED táctil frente a MIP de 30 g</h2>
+      <h2>1. Diseño y pantalla: AMOLED frente a transflectiva</h2>
       <p>Es la diferencia que se ve nada más sacarlos de la caja, y la que más condiciona el uso diario. El <strong>Forerunner 165</strong> monta una pantalla <strong>AMOLED táctil</strong> de 1,2" y 390 x 390 píxeles: negros profundos, colores vivos y un brillo que hace que esferas, gráficos de ritmo o de frecuencia cardíaca y notificaciones se lean con una nitidez de smartwatch moderno. Hasta hace poco Garmin reservaba este tipo de pantalla a modelos bastante más caros. Además, combina el táctil con cinco botones físicos: deslizas para moverte por los widgets en el sofá y usas los botones en carrera, con sudor o con lluvia.</p>
       <p>El <strong>PACE 3</strong> usa una pantalla <strong>MIP transflectiva</strong> de 1,2" y 240 x 240 píxeles, siempre encendida. Tiene menos resolución, menos colores y menos contraste en interiores, pero funciona al revés que una AMOLED: refleja la luz ambiente, así que <strong>cuanto más sol le da, mejor se lee</strong>. A mediodía en verano, en la pista o en una subida a pleno sol, basta con girar un poco la muñeca para ver ritmo y pulso sin sombras ni reflejos. Y como está siempre encendida sin coste apreciable de batería, nunca tienes que levantar la muñeca para despertarla. Se maneja con una corona digital y dos botones, cómodos también con guantes.</p>
       <p>La AMOLED del 165 también se lee bien al sol gracias a su brillo, pero por defecto se apaga hasta que levantas la muñeca. Puedes activar el modo "siempre encendida", aunque entonces la autonomía cae de forma notable: es el peaje de una pantalla que emite luz en lugar de reflejarla.</p>
-      <p>El otro factor es el peso. Los dos pesan <strong>39 g</strong> con correa de silicona, ya muy poco para un reloj GPS, pero el PACE 3 con la correa de nylon baja a <strong>30 g</strong>. Es una ligereza extrema que se nota en series rápidas, donde el reloj no rebota, en tiradas largas y, sobre todo, para dormir con él, algo necesario si quieres que mida el sueño y la recuperación. Ambos son sumergibles a 5 ATM.</p>
+      <p>En diseño, los dos son relojes de plástico ligeros y discretos, pensados para correr más que para lucir. Los dos pesan <strong>39 g</strong> con correa de silicona, ya muy poco para un reloj GPS, pero el PACE 3 con la correa de nylon baja a <strong>30 g</strong>. Es una ligereza extrema que se nota en series rápidas, donde el reloj no rebota, en tiradas largas y, sobre todo, para dormir con él, algo necesario si quieres que mida el sueño y la recuperación. Ambos son sumergibles a 5 ATM.</p>
       <ul>
-        <li><strong>Gana el Forerunner 165</strong> si quieres una pantalla vistosa y táctil que luzca también fuera del entrenamiento.</li>
+        <li><strong>Gana el Forerunner 165</strong> si quieres una pantalla vistosa y a color que luzca también fuera del entrenamiento.</li>
         <li><strong>Gana el PACE 3</strong> si priorizas leer tus datos al sol, a cualquier hora y sin pensar en la batería, con el reloj más ligero posible.</li>
       </ul>
 
-      <h2>GPS y precisión: monobanda frente a multibanda de doble frecuencia</h2>
+      <h2>2. Precisión GPS y sensores de pulso</h2>
       <p>Aquí está la diferencia técnica más importante del duelo. El <strong>Forerunner 165</strong> usa un GPS <strong>monobanda</strong> compatible con GPS, GLONASS y Galileo: recibe una sola frecuencia de cada satélite (la clásica L1). El <strong>PACE 3</strong> tiene <strong>GPS multibanda nativo de doble frecuencia</strong> (L1 + L5) y es compatible con los cinco grandes sistemas: GPS, GLONASS, Galileo, Beidou y QZSS.</p>
       <p>¿Qué cambia en la práctica? La señal de los satélites rebota en fachadas, paredes de roca o copas de árboles antes de llegar al reloj. Con una sola frecuencia, el reloj no siempre sabe distinguir la señal directa del rebote, y el trazado "corta" curvas, dibuja zigzags o se sale de la calle. Con dos frecuencias, el PACE 3 compara ambas y filtra mucho mejor esos errores: el ritmo instantáneo es más estable y la distancia final se ajusta más a la real.</p>
-      <p>Dónde se nota:</p>
       <ul>
         <li><strong>Ciudad con edificios altos:</strong> el entorno más difícil para cualquier GPS. Aquí el multibanda marca la diferencia más clara, sobre todo en el ritmo kilómetro a kilómetro.</li>
         <li><strong>Bosque cerrado y montaña:</strong> bajo árboles o en barrancos, el PACE 3 mantiene trazados limpios donde el 165 puede sumar o restar distancia.</li>
         <li><strong>Parques, carreteras y caminos abiertos:</strong> con cielo despejado, el GPS del 165 es bueno y suficiente para la mayoría de corredores. La diferencia existe, pero es pequeña.</li>
       </ul>
-      <p>Para series en pista, más que el tipo de GPS importa usar el perfil de pista y no el de carrera normal. Y si entrenas por ritmo en series cortas, ten en cuenta que ningún GPS de muñeca es perfecto en los primeros segundos de cada repetición.</p>
-      <p>La doble frecuencia tiene un coste: gasta más batería. En el PACE 3, la autonomía con GPS pasa de 38 h en modo estándar a 15 h en doble frecuencia, así que lo lógico es activarla solo donde la necesitas. En el 165 no hay elección: todos sus modos son de una frecuencia, y activar todos los sistemas GNSS reduce su autonomía de 19 a 17 horas.</p>
-      <p>Ambos tienen <strong>altímetro barométrico</strong>, así que el desnivel acumulado es fiable en los dos: la ventaja del PACE 3 está en la posición, no en la altitud. Si quieres entender cuándo compensa pagar por multibanda, lo explicamos en <a href="/guias/que-precision-gps-necesitas-realmente">¿Qué precisión GPS necesitas realmente?</a></p>
+      <p>La doble frecuencia tiene un coste: gasta más batería. En el PACE 3, la autonomía con GPS pasa de 38 h en modo estándar a 15 h en doble frecuencia, así que lo lógico es activarla solo donde la necesitas. En el 165 no hay elección: todos sus modos son de una frecuencia, y activar todos los sistemas GNSS reduce su autonomía de 19 a 17 horas. Si quieres entender cuándo compensa pagar por multibanda, lo explicamos en <a href="/guias/que-precision-gps-necesitas-realmente">¿Qué precisión GPS necesitas realmente?</a></p>
+      <h3>Pulso en la muñeca y métricas de entrenamiento</h3>
+      <p>Los dos miden la <strong>frecuencia cardíaca en la muñeca</strong> con sensor óptico y aceptan <strong>banda de pecho</strong>. Para rodajes suaves y tiradas a ritmo constante, ambos sensores ópticos dan lecturas fiables; en series cortas y cambios bruscos de ritmo, cualquier sensor de muñeca reacciona con retraso, así que si entrenas por zonas en intervalos conviene sumar una banda de pecho, sea cual sea el reloj.</p>
+      <p>Donde sí se separan es en lo que hacen con esos datos. <strong>Garmin Connect</strong> pone el foco en la <strong>salud diaria</strong>: Body Battery, Sleep Score, estado de VFC, estrés, entrenamientos sugeridos según tu recuperación y <strong>potencia de carrera en la muñeca</strong>. Le falta la puntuación de <em>Training Readiness</em> de los Forerunner superiores. <strong>COROS</strong> apuesta por un <strong>enfoque analítico de atletismo</strong>: carga de entrenamiento, impacto de la carga, nivel de fatiga, forma de base y predicción de marcas en EvoLab, con la web gratuita <strong>COROS Training Hub</strong> para analizar sesiones y construir planes en pantalla grande. Si quieres un compañero de salud para todo el día, Garmin es más completo; si quieres entender tu carga de entrenamiento, COROS es más directo por menos dinero.</p>
 
-      <h2>Autonomía: 38 h de GPS frente a 19 h</h2>
+      <h2>3. Autonomía de batería en entrenamiento real</h2>
       <p>El PACE 3 es claramente superior, y por mucho. Con el GPS activo llega a <strong>hasta 38 horas</strong> en modo estándar, frente a las <strong>hasta 19 horas</strong> del Forerunner 165 en modo solo GPS: exactamente el doble. Incluso en doble frecuencia, el modo más exigente, el COROS aguanta 15 horas, casi lo mismo que el Garmin en su modo más ahorrador. En uso diario como reloj inteligente, el PACE 3 llega a <strong>15 días</strong> frente a los <strong>11 días</strong> del 165.</p>
       <p>Las cifras de folleto se miden en condiciones ideales, así que conviene traducirlas a semanas reales. Con 4-5 entrenamientos de una hora a la semana, notificaciones activas y seguimiento del sueño, el PACE 3 suele aguantar en torno a dos semanas entre cargas y el 165 alrededor de una. Si en el Garmin activas la pantalla siempre encendida, el margen se reduce bastante más. No es un problema grave —cargar una vez a la semana es asumible—, pero sí una diferencia que se nota en el día a día y en los viajes.</p>
-      <p>Dónde la autonomía deja de ser comodidad y pasa a ser decisiva:</p>
       <ul>
         <li><strong>Maratón:</strong> los dos van sobrados, incluso con margen para el calentamiento y el regreso a casa.</li>
         <li><strong>Trail y ultras:</strong> una carrera de montaña de 50 km puede llevar 7-10 horas; un 100 km, 15-20 o más. Con 19 h, el 165 llega justo o no llega a las distancias largas; el PACE 3, con 38 h, termina con batería de sobra.</li>
         <li><strong>Vacaciones y viajes:</strong> con el PACE 3 puedes salir una semana sin cargador y seguir registrando entrenamientos y sueño.</li>
         <li><strong>Precisión máxima:</strong> si quieres la doble frecuencia en todas las salidas, el PACE 3 sigue dando 15 horas.</li>
       </ul>
-      <p>Hay un matiz importante: la diferencia de batería está muy ligada a la de pantalla. La MIP del PACE 3 apenas consume; la AMOLED del 165 es la que más energía gasta del reloj. Garmin ha conseguido una autonomía buena para una pantalla AMOLED, pero no puede competir con una MIP en este terreno.</p>
-      <p>Si la batería es tu prioridad, el veredicto es claro: el <strong>PACE 3</strong> es uno de los relojes con más autonomía por euro del mercado. Si cargas el reloj cada fin de semana sin problema y no corres ultras, las 19 horas del 165 cubren de sobra el entrenamiento habitual de un corredor popular.</p>
+      <p>La diferencia de batería está muy ligada a la de pantalla: la MIP del PACE 3 apenas consume; la AMOLED del 165 es lo que más energía gasta del reloj. Garmin ha conseguido una autonomía buena para una AMOLED, pero no puede competir con una MIP en este terreno. Si cargas el reloj cada fin de semana sin problema y no corres ultras, las 19 horas del 165 cubren de sobra el entrenamiento habitual de un corredor popular.</p>
 
-      <h2>Software y ecosistema: salud diaria en Garmin Connect frente a análisis puro en COROS</h2>
-      <p>Los dos relojes cubren lo básico del entrenamiento —frecuencia cardíaca en la muñeca, compatibilidad con bandas de pecho, VO2 máx. estimado, tiempo de recuperación, entrenamientos estructurados y sincronización con Strava—, pero sus plataformas tienen filosofías distintas.</p>
-      <p><strong>Garmin Connect</strong> pone el foco en la <strong>salud diaria y la vida cotidiana</strong>. Con el Forerunner 165 tienes <strong>Body Battery</strong>, que estima tu energía disponible a lo largo del día combinando sueño, estrés y actividad; <strong>Sleep Score</strong> con análisis de las fases del sueño; seguimiento del estrés y entrenamientos sugeridos cada día según tu recuperación. En carrera suma <strong>potencia de carrera en la muñeca</strong> y los planes adaptativos de Garmin Coach. Fuera del deporte, ganas <strong>Garmin Pay</strong>, notificaciones cómodas de leer en la AMOLED y una tienda de esferas y aplicaciones muy amplia. Le falta la puntuación de <em>Training Readiness</em> de los Forerunner superiores, y la música offline exige la versión Music, más cara.</p>
-      <p><strong>COROS</strong> apuesta por un <strong>enfoque analítico puro de atletismo</strong>. Su plataforma EvoLab y la web gratuita <strong>COROS Training Hub</strong> están pensadas para quien entrena con objetivos: <strong>carga de entrenamiento</strong> por sesión y acumulada, <strong>impacto de la carga</strong> en tu forma física, nivel de fatiga, forma de base, índice de rendimiento en carrera y predicción de marcas. El Training Hub permite analizar cada sesión en una pantalla grande, comparar semanas, construir entrenamientos y planes y enviarlos al reloj. Es un nivel de análisis que en Garmin exige subir a modelos más caros. A cambio, COROS ofrece menos en el día a día: no hay pagos sin contacto, su ecosistema de aplicaciones es mucho más limitado y las funciones de salud son más sobrias. Eso sí, la <strong>música offline viene de serie</strong>.</p>
-      <p>La elección depende de para qué quieres el reloj. Si buscas un compañero para todo el día que te diga cómo has dormido, cuánta energía te queda y te deje pagar el café después de correr, Garmin Connect es más completo y más amable. Si lo que quieres es entender tu entrenamiento —cuánto has cargado, cuánto te ha afectado, cuándo estás listo para apretar—, el enfoque de COROS es más directo y más profundo por menos dinero.</p>
-      <p>Ninguno de los dos ofrece <strong>mapas completos</strong>: ambos se limitan a seguir el trazado de una ruta cargada. Si necesitas mapas en el reloj, tendrás que subir de gama.</p>
+      <h2>4. Navegación y funciones de montaña</h2>
+      <p>En navegación están empatados: los dos <strong>navegan por migas de pan</strong>. Creas la ruta o importas un GPX en la app (Garmin Connect o COROS), la sincronizas y el reloj dibuja la línea del recorrido con tu posición encima, avisándote si te sales del track, y los dos pueden guiarte de vuelta al punto de inicio. Para carreras balizadas, rutas conocidas o senderos evidentes es todo lo que necesitas. Lo que <strong>ninguno tiene son mapas</strong>: ves hacia dónde va la línea, pero no qué senderos hay alrededor si toca improvisar una variante.</p>
+      <p>Ambos llevan <strong>altímetro barométrico</strong>, así que el desnivel acumulado es fiable en los dos: en montaña, la ventaja del PACE 3 está en la posición, no en la altitud. Y en montaña se suman sus otros argumentos: el GPS multibanda mantiene limpio el trazado bajo árboles y en barrancos, los 30 g con correa de nylon no molestan en una tirada de seis horas y las 38 h de batería dan para un ultra sin buscar enchufe. El 165 cumple en rutas cortas y medias, pero se queda corto de autonomía en las largas.</p>
+      <p>Si la montaña es tu terreno principal, el PACE 3 es la mejor opción de los dos, y aparece en nuestra selección de los <a href="/guias/mejores-relojes-gps-trail-montana">mejores relojes GPS para trail y montaña</a>, donde lo comparamos con alternativas con mapas topográficos y más robustez. Si necesitas ver el mapa en la muñeca, el siguiente paso lógico es el Suunto Race S: lo enfrentamos al PACE 3 en <a href="/comparativas/coros-pace-3-vs-suunto-race-s">COROS PACE 3 vs Suunto Race S</a>.</p>
+      <h3>Más allá de correr: triatlón y multideporte</h3>
+      <p>Ambos registran natación y ciclismo por separado, pero solo el <strong>PACE 3</strong> tiene <strong>perfil de triatlón</strong>: encadena natación, transición, bici y carrera en una sola actividad con un toque de botón. En el Forerunner 165 tendrías que parar y arrancar una actividad distinta para cada segmento, algo poco práctico en competición. Si te planteas tu primer triatlón o duatlón, es un motivo de peso para elegir el COROS.</p>
 
       <p>¿Quieres más detalle de cada uno? Lee nuestra <a href="/relojes/garmin-forerunner-165">reseña completa del Garmin Forerunner 165</a> o la <a href="/relojes/coros-pace-3">ficha del COROS PACE 3</a>. Si estás dispuesto a subir de gama en Garmin, comparamos el PACE 3 con el Forerunner 265 en <a href="/comparativas/coros-pace-3-vs-garmin-forerunner-265">COROS PACE 3 vs Forerunner 265</a>, y tienes los dos en nuestra guía de los <a href="/guias/mejores-relojes-gps-calidad-precio">mejores relojes GPS calidad-precio</a>.</p>
     `,
+    verdictTitle: "Veredicto y recomendación de compra",
     verdict: [
       {
         watchSlug: "garmin-forerunner-165",
-        heading: "Elige el Garmin Forerunner 165 si…",
+        heading: "Elijo el Garmin Forerunner 165 si…",
         points: [
-          "Quieres una pantalla AMOLED táctil, brillante y a color, con la estética de un smartwatch moderno.",
-          "Te interesan las métricas de salud y vida cotidiana: Body Battery, Sleep Score, estrés y entrenamientos sugeridos según tu recuperación.",
-          "Vas a llevarlo todo el día: Garmin Pay, notificaciones cómodas de leer y una gran tienda de esferas y aplicaciones.",
-          "Entrenas sobre todo en terreno abierto, donde el GPS monobanda es suficiente, y cargar una vez a la semana no te supone un problema.",
+          "Quiero una pantalla AMOLED táctil, brillante y a color, con la estética de un smartwatch moderno.",
+          "Me interesan las métricas de salud diaria: Body Battery, Sleep Score, estado de VFC y entrenamientos sugeridos según mi recuperación.",
+          "Voy a llevarlo todo el día: Garmin Pay, notificaciones cómodas de leer y una gran tienda de esferas y aplicaciones.",
+          "Entreno sobre todo en terreno abierto, donde el GPS monobanda es suficiente, y cargar una vez a la semana no me supone un problema.",
         ],
       },
       {
         watchSlug: "coros-pace-3",
-        heading: "Elige el COROS PACE 3 si…",
+        heading: "Elijo el COROS PACE 3 si…",
         points: [
-          "Buscas el mejor reloj de rendimiento puro por menos de 250 €.",
-          "Quieres ligereza extrema: 30 g con correa de nylon, cómodo en series y para dormir.",
-          "La batería con GPS es tu prioridad: hasta 38 h, el doble que el 165, y 15 h incluso en doble frecuencia.",
-          "Corres en ciudad, bosque o montaña y quieres la precisión del GPS multibanda y el análisis de carga de COROS Training Hub.",
+          "Busco el mejor reloj de rendimiento puro por menos de 250 €.",
+          "Quiero ligereza extrema: 30 g con correa de nylon, cómodo en series y para dormir.",
+          "La batería con GPS es mi prioridad: hasta 38 h, el doble que el 165, y 15 h incluso en doble frecuencia.",
+          "Corro en ciudad, bosque o montaña, o me planteo un triatlón, y quiero GPS multibanda y perfil de triatlón.",
         ],
       },
     ],
